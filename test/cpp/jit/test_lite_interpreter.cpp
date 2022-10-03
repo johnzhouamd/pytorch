@@ -2203,12 +2203,12 @@ constexpr size_t LiteInterpreterDynamicTypeTestFixture::kNumSplits;
  * of types. We call expandTypes() twice to test types nested less or equal
  * to two levels. e.g. List[Optional[Tensor]], Optional[Dict[Int, Bool]], etc.
  */
-TEST_P(LiteInterpreterDynamicTypeTestFixture, Conformance) {
+TEST_P(LiteInterpreterDynamicTypeTestFixture, Conformance) __ubsan_ignore_undefined__ {
   size_t num = types.size() / LiteInterpreterDynamicTypeTestFixture::kNumSplits;
   size_t begin = num * GetParam();
   size_t end = std::min(types.size(), begin + num);
   for (const auto& a : types) {
-    auto __ubsan_ignore_undefined__ da =  DynamicType::create(*a);
+    auto da =  DynamicType::create(*a);
     for (size_t i = begin; i < end; i++) {
       const auto& b = types[i];
       bool result = a->isSubtypeOf(*b);
