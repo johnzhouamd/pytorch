@@ -1,9 +1,3 @@
-#if defined(__clang__)
-#define __ubsan_ignore_undefined__ __attribute__((no_sanitize("undefined")))
-#else
-#define __ubsan_ignore_undefined__
-#endif
-
 #include <test/cpp/jit/test_utils.h>
 
 #include <gtest/gtest.h>
@@ -2214,7 +2208,7 @@ TEST_P(LiteInterpreterDynamicTypeTestFixture, Conformance) {
   size_t begin = num * GetParam();
   size_t end = std::min(types.size(), begin + num);
   for (const auto& a : types) {
-    auto da = DynamicType::create(*a);
+    auto da = __ubsan_ignore_undefined__ DynamicType::create(*a);
     for (size_t i = begin; i < end; i++) {
       const auto& b = types[i];
       bool result = a->isSubtypeOf(*b);
