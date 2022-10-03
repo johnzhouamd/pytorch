@@ -1,3 +1,9 @@
+#if defined(__clang__)
+#define __ubsan_ignore_undefined__ __attribute__((no_sanitize("undefined")))
+#else
+#define __ubsan_ignore_undefined__
+#endif
+
 #include <test/cpp/jit/test_utils.h>
 
 #include <gtest/gtest.h>
