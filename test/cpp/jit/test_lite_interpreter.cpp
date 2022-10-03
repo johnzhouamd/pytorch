@@ -2208,7 +2208,7 @@ TEST_P(LiteInterpreterDynamicTypeTestFixture, Conformance) {
   size_t begin = num * GetParam();
   size_t end = std::min(types.size(), begin + num);
   for (const auto& a : types) {
-    auto da = __ubsan_ignore_undefined__ DynamicType::create(*a);
+    auto __ubsan_ignore_undefined__ da =  DynamicType::create(*a);
     for (size_t i = begin; i < end; i++) {
       const auto& b = types[i];
       bool result = a->isSubtypeOf(*b);
