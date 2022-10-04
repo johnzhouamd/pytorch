@@ -923,7 +923,7 @@ struct PythonPrintImpl {
     return hasNonASCII;
   }
 
-  void printConstant(TaggedStringStream& stmt, const IValue& v) {
+  void printConstant(TaggedStringStream& stmt, const IValue& v) __ubsan_ignore_undefined__ {
     const auto customFormatter = [&](std::ostream& ss, const IValue& v) {
       if (v.isTensor() || containsNonASCIIString(v) || v.isObject()) {
         TORCH_INTERNAL_ASSERT(!v.type<c10::Type>()->is_module());
@@ -972,7 +972,7 @@ struct PythonPrintImpl {
   }
 
   // Prints the RHS value of a Node, e.g. `aten.add(x, y)`
-  void printRHS(TaggedStringStream& stmt, Node* node) {
+  void printRHS(TaggedStringStream& stmt, Node* node)  __ubsan_ignore_undefined__{
     switch (node->kind()) {
       case prim::PythonOp: {
         auto value = static_cast<const PythonOp*>(node);

@@ -52,7 +52,7 @@ constexpr uint32_t kMinVersion = 9;
 // We will store IValue NONE in index 0 in flatbuffer.
 constexpr int kNoneIndex = 0;
 
-static TypePtr realType(TypePtr type) {
+static TypePtr realType(TypePtr type) __ubsan_ignore_undefined__ {
   if (auto dyn = type->castRaw<c10::DynamicType>()) {
     return dyn->fallback();
   } else {
@@ -60,7 +60,7 @@ static TypePtr realType(TypePtr type) {
   }
 }
 
-auto print_type(const c10::Type& t) -> c10::optional<std::string> {
+auto print_type(const c10::Type& t) -> c10::optional<std::string> __ubsan_ignore_undefined__ {
   auto namedType = t.cast<c10::NamedType>();
   if (namedType && namedType->name()) {
     return namedType->name().value().qualifiedName();
@@ -275,7 +275,7 @@ flatbuffers::Offset<mobile::serialization::Function> FlatbufferSerializer::
   auto register_size = static_cast<int>(code.register_size_);
 
   // schema
-  auto type_printer = [&](const c10::Type& t) -> c10::optional<std::string> {
+  auto type_printer = [&](const c10::Type& t) -> c10::optional<std::string> __ubsan_ignore_undefined__ {
     auto namedType = t.cast<c10::NamedType>();
     if (namedType && namedType->name()) {
       return namedType->name().value().qualifiedName();

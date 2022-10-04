@@ -588,7 +588,7 @@ IValue parseDict(
 }
 
 ClassTypePtr FlatbufferLoader::getOrCreateClassTypeForObject(
-    const mobile::serialization::Object* object) {
+    const mobile::serialization::Object* object) __ubsan_ignore_undefined__ {
   auto cls = getType(object->type_index());
   const mobile::serialization::ObjectType* obj_type =
       module_->object_types()->Get(object->type_index());

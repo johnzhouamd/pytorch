@@ -163,7 +163,7 @@ std::pair<IValue, IValue> getFunctionTuple(
     const CompilationUnit& compilation_unit,
     const mobile::Function& func,
     BackendDebugInfoRecorder& debug_info_recorder,
-    TypeNameUniquer& type_name_uniquer_) {
+    TypeNameUniquer& type_name_uniquer_) __ubsan_ignore_undefined__ {
   const auto& mobile_code = func.get_code();
 
   // instructions
@@ -262,7 +262,7 @@ std::pair<IValue, IValue> getFunctionTuple(
     return c10::nullopt;
   };
 
-  auto makeArgTuple = [&](const std::vector<Argument>& args) {
+  auto makeArgTuple = [&](const std::vector<Argument>& args) __ubsan_ignore_undefined__ {
     std::vector<IValue> argTables;
     for (auto&& arg : args) {
       TORCH_CHECK(
@@ -743,7 +743,7 @@ namespace {
 
 c10::optional<std::string> type_printer(
     const c10::Type& type,
-    torch::jit::TypeNameUniquer& type_name_uniquer) {
+    torch::jit::TypeNameUniquer& type_name_uniquer) __ubsan_ignore_undefined__ {
   if (auto dyn = type.castRaw<c10::DynamicType>()) {
     return dyn->fallback()->annotation_str(
         [&](auto&& t) { return type_printer(t, type_name_uniquer); });

@@ -33,7 +33,7 @@ void createObject(Stack& stack, const at::ClassTypePtr& type) {
   push(stack, std::move(userObj));
 }
 
-void isinstance(Stack& stack, at::ArrayRef<at::TypePtr> types) {
+void isinstance(Stack& stack, at::ArrayRef<at::TypePtr> types) __ubsan_ignore_undefined__ {
   at::TypePtr ty = pop(stack).type<c10::DynamicType>();
   for (const at::TypePtr& candidate : types) {
     if (ty->isSubtypeOf(*candidate)) {

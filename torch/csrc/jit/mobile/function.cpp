@@ -129,7 +129,7 @@ const c10::FunctionSchema& Function::getSchema() const {
   return *schema_;
 }
 
-void Function::run(Stack& stack) {
+void Function::run(Stack& stack) __ubsan_ignore_undefined__ {
   initialize_operators(/* should_check_operators */ true);
   if (hasSchema()) { // if we have a schema then resolve optional args if any
     getSchema().checkAndNormalizeInputs<c10::DynamicType>(

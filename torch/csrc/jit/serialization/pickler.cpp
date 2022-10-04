@@ -570,7 +570,7 @@ void Pickler::startTypeTag() {
   pushGlobal("torch.jit._pickle", "restore_type_tag");
 }
 namespace {
-c10::optional<std::string> type_printer(const c10::Type& type) {
+c10::optional<std::string> type_printer(const c10::Type& type) __ubsan_ignore_undefined__ {
   if (auto dyn = type.castRaw<c10::DynamicType>()) {
     return dyn->fallback()->annotation_str(type_printer);
   }

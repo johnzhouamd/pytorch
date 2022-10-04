@@ -188,7 +188,7 @@ std::map<std::string, at::Tensor> load_parameters_from_zip(
  * compatible with the one created by #_save_parameters().
  */
 std::map<std::string, at::Tensor> mobile_module_to_parameter_map(
-    const mobile::Module& module) {
+    const mobile::Module& module) __ubsan_ignore_undefined__ {
   // Safely look for a slot with the expected name. Note that
   // c10::ivalue::Object::getAttr() is not safe if the attribute isn't present.
   auto obj = module._ivalue();

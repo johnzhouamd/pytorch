@@ -17,7 +17,7 @@
 namespace torch {
 namespace jit {
 
-static inline TypePtr unwrapOptional(TypePtr opt_type) {
+static inline TypePtr unwrapOptional(TypePtr opt_type) __ubsan_ignore_undefined__ {
   if (auto dyn = opt_type->castRaw<c10::DynamicType>()) {
     return unwrapOptional(dyn->fallback());
   }
@@ -299,7 +299,7 @@ static Value* tryCreateList(
 static bool varargsCanBeUsedAsList(
     const FunctionSchema& schema,
     size_t arg_index,
-    const Argument& arg) {
+    const Argument& arg) __ubsan_ignore_undefined__ {
   // The arg must be the last one in the arg list that is not a kwarg
   bool is_last_argument = arg_index + 1 == schema.arguments().size() ||
       schema.arguments()[arg_index + 1].kwarg_only();

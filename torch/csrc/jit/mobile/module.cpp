@@ -311,7 +311,7 @@ c10::IValue Method::operator()(std::vector<c10::IValue> stack) const {
   return stack.front();
 }
 
-c10::optional<std::string> print_type(const c10::Type& t) {
+c10::optional<std::string> print_type(const c10::Type& t) __ubsan_ignore_undefined__ {
   auto namedType = t.cast<c10::NamedType>();
   if (namedType && namedType->name()) {
     return namedType->name().value().qualifiedName();

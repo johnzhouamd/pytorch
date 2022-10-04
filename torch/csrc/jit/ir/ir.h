@@ -1483,7 +1483,7 @@ inline Value::Value(Node* node_, size_t offset_)
   node_->graph_->all_values.emplace(this);
 }
 
-inline Value* Value::setType(TypePtr type) {
+inline Value* Value::setType(TypePtr type) __ubsan_ignore_undefined__ {
   AT_ASSERT(type);
   if (auto dyn = type->castRaw<c10::DynamicType>()) {
     type = dyn->fallback();

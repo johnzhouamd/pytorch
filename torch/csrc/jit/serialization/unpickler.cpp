@@ -32,7 +32,7 @@ static void restoreAccurateTypeTagsIfPossible(const IValue& root) {
 // the top-level unpickled thing (which is guaranteed for Modules, but
 // not for torch.load/torch.save). Otherwise we do not know the types
 // of the contained objects and cannot restore the tags.
-void restoreAccurateTypeTags(const IValue& root, const TypePtr& type_tag) {
+void restoreAccurateTypeTags(const IValue& root, const TypePtr& type_tag) __ubsan_ignore_undefined__ {
   struct Work {
     TypePtr type;
     IValue value;
@@ -165,7 +165,7 @@ void restoreAccurateTypeTags(const IValue& root, const TypePtr& type_tag) {
 
 namespace {
 template <typename T>
-bool is(const Type& type) {
+bool is(const Type& type) __ubsan_ignore_undefined__ {
   if (type.kind() == T::Kind) {
     return true;
   }
